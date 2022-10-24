@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:codedesign/constants.dart';
 
 class SidebarButton extends StatelessWidget {
+  SidebarButton({required this.triggerAnimation});
+
+  final Function() triggerAnimation;
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +16,7 @@ class SidebarButton extends StatelessWidget {
         maxHeight: 40,
         maxWidth: 40,
       ),
+      onPressed: triggerAnimation,
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -29,7 +33,6 @@ class SidebarButton extends StatelessWidget {
         child: Image.asset('asset/icons/icon-sidebar.png',
             color: kPrimaryLabelColor),
       ),
-      onPressed: () {},
     );
   }
 }

@@ -6,6 +6,11 @@ import '../constants.dart';
 
 
 class HomeScreenNavBar extends StatelessWidget {
+
+  HomeScreenNavBar({required this.triggerAnimation});
+
+  final Function() triggerAnimation;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -13,16 +18,16 @@ class HomeScreenNavBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SidebarButton(),
+          SidebarButton(triggerAnimation: triggerAnimation,),
           const SearchFieldWidget(),
           const Icon(
             Icons.notifications,
             color: kPrimaryLabelColor,
           ),
-          SizedBox(
+          const SizedBox(
             width: 16,
           ),
-          CircleAvatar(
+          const CircleAvatar(
             radius: 18,
             backgroundImage: AssetImage('asset/images/profile.jpg'),
           )
