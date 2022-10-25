@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'package:codedesign/model/slidebar.dart';
 
 class SidebarRow extends StatelessWidget {
