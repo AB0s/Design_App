@@ -1,4 +1,8 @@
+import 'package:codedesign/components/cards/completed_courses_card.dart';
+import 'package:codedesign/components/certificate_viewer.dart';
+import 'package:codedesign/components/lists/completed_courses_list.dart';
 import 'package:codedesign/constants.dart';
+import 'package:codedesign/model/course.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -6,16 +10,16 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> badges=[
+    final List<String> badges = [
       'badge-01.png',
       'badge-02.png',
       'badge-03.png',
       'badge-04.png',
     ];
     return Scaffold(
-        backgroundColor: kBackgroundColor,
-        body: SingleChildScrollView(
-            child: Column(
+      backgroundColor: kBackgroundColor,
+      body: SingleChildScrollView(
+        child: Column(
           children: [
             Container(
               decoration: const BoxDecoration(
@@ -171,33 +175,100 @@ class ProfileScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(height: 16,),
+                    SizedBox(
+                      height: 16,
+                    ),
                     Container(
                       height: 112,
                       child: ListView.builder(
                           padding: EdgeInsets.only(bottom: 28),
                           scrollDirection: Axis.horizontal,
                           itemCount: badges.length,
-                          itemBuilder: (context,index){
+                          itemBuilder: (context, index) {
                             return Container(
-                              padding: EdgeInsets.only(left: 20,right: index!=3 ? 0:20),
+                              padding: EdgeInsets.only(
+                                  left: 20, right: index != 3 ? 0 : 20),
                               decoration: BoxDecoration(
                                 boxShadow: [
-                                  BoxShadow(color: kShadowColor.withOpacity(0.1),
-                                  offset: Offset(0,12),
-                                    blurRadius: 18
-                                  ),
+                                  BoxShadow(
+                                      color: kShadowColor.withOpacity(0.1),
+                                      offset: Offset(0, 12),
+                                      blurRadius: 18),
                                 ],
                               ),
-                              child: Image.asset('asset/badges/${badges[index]}'),
+                              child:
+                                  Image.asset('asset/badges/${badges[index]}'),
                             );
                           }),
                     )
                   ],
                 ),
               ),
-            )
+            ),
+            Padding(
+              padding:
+              EdgeInsets.only(top: 32, left: 20, right: 20, bottom: 12),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Certificates",
+                        style: kHeadlineLabelStyle,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "See all",
+                            style: kSearchPlaceholderStyle,
+                          ),
+                          const Icon(
+                            Icons.chevron_right,
+                            color: kSecondaryLabelColor,
+                          ),
+                        ],
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+            CertificantViewer(),
+            Padding(
+              padding:
+              EdgeInsets.only(left: 20, right: 20, bottom: 12),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Completed Courses",
+                        style: kHeadlineLabelStyle,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "See all",
+                            style: kSearchPlaceholderStyle,
+                          ),
+                          const Icon(
+                            Icons.chevron_right,
+                            color: kSecondaryLabelColor,
+                          ),
+                        ],
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+            CompletedCoursesList(),
+            SizedBox(height: 28,),
           ],
-        )));
+        ),
+      ),
+    );
   }
 }
