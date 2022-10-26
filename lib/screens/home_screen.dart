@@ -126,8 +126,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   SlideTransition(
                     position: sidebarAnimation,
                     child: SafeArea(
-                      child: SidebarScreen(),
                       bottom: false,
+                      child: SidebarScreen(),
                     ),
                   ),
                 ],
