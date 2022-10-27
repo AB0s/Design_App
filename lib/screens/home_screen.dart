@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late Animation<double> fadeAnimation;
   late AnimationController sidebarAnimationController;
 
-  var sidebarHidden=true;
+  var sidebarHidden = true;
 
   @override
   void initState() {
@@ -39,11 +39,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   @override
-  void dispose(){
+  void dispose() {
     super.dispose();
     sidebarAnimationController.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +57,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   children: [
                     HomeScreenNavBar(
                       triggerAnimation: () {
-                        setState((){
-                          sidebarHidden=!sidebarHidden;
+                        setState(() {
+                          sidebarHidden = !sidebarHidden;
                         });
                         sidebarAnimationController.forward();
                       },
@@ -116,8 +115,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         width: MediaQuery.of(context).size.width,
                       ),
                       onTap: () {
-                        setState((){
-                          sidebarHidden=!sidebarHidden;
+                        setState(() {
+                          sidebarHidden = !sidebarHidden;
                         });
                         sidebarAnimationController.reverse();
                       },
@@ -139,4 +138,3 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 }
-
