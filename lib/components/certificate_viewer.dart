@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 class CertificantViewer extends StatefulWidget {
-  const CertificantViewer({Key? key}) : super(key: key);
+  const CertificantViewer({Key key}) : super(key: key);
 
   @override
   State<CertificantViewer> createState() => _CertificantViewerState();
@@ -14,7 +14,7 @@ class _CertificantViewerState extends State<CertificantViewer> {
     'asset/certificates/certificate-02.png',
     'asset/certificates/certificate-03.png'
   ];
-  late Widget certificateViewer;
+   Widget certificateViewer;
   @override
   void initState() {
     super.initState();

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 
 class HomeScreenNavBar extends StatelessWidget {
-  HomeScreenNavBar({required this.triggerAnimation});
+  HomeScreenNavBar({@required this.triggerAnimation});
 
   final Function() triggerAnimation;
 

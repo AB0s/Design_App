@@ -6,7 +6,7 @@ import '../cards/explore_course_card.dart';
 
 
 class ExploreCourseList extends StatelessWidget {
-  const ExploreCourseList({Key? key}) : super(key: key);
+  const ExploreCourseList({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

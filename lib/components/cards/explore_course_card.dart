@@ -5,7 +5,7 @@ import '../../model/course.dart';
 
 
 class ExploreCourseCard extends StatelessWidget {
-  ExploreCourseCard({required this.course});
+  ExploreCourseCard({@required this.course});
   final Course course;
 
   @override

@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:codedesign/model/slidebar.dart';
 
 class SidebarRow extends StatelessWidget {
-  SidebarRow({required this.item});
+  SidebarRow({@required this.item});
 
   final SidebarItem item;
 

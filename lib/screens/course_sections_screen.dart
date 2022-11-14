@@ -4,6 +4,8 @@ import '../components/lists/course_sections_list.dart';
 import '../constants.dart';
 
 class CourseSectionsScreen extends StatelessWidget {
+  const CourseSectionsScreen({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(

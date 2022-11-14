@@ -14,9 +14,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  late Animation<Offset> sidebarAnimation;
-  late Animation<double> fadeAnimation;
-  late AnimationController sidebarAnimationController;
+   Animation<Offset> sidebarAnimation;
+   Animation<double> fadeAnimation;
+   AnimationController sidebarAnimationController;
 
   var sidebarHidden = true;
 

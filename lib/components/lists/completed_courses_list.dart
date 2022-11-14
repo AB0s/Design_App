@@ -3,7 +3,7 @@ import '../../model/course.dart';
 import '../cards/completed_courses_card.dart';
 import '../cards/continue_watching_card.dart';
 class CompletedCoursesList extends StatefulWidget {
-  const CompletedCoursesList({Key? key}) : super(key: key);
+  const CompletedCoursesList({Key key}) : super(key: key);
 
   @override
   State<CompletedCoursesList> createState() => _CompletedCoursesListState();

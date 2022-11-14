@@ -7,7 +7,7 @@ import '../model/course.dart';
 import 'course_sections_screen.dart';
 
 class CourseScreen extends StatefulWidget {
-  CourseScreen({required this.course});
+  CourseScreen({@required this.course});
   final Course course;
 
   @override
@@ -34,7 +34,7 @@ class _CourseScreenState extends State<CourseScreen> {
     );
   }
 
-  late PanelController panelController;
+   PanelController panelController;
   @override
   void initState() {
     super.initState();

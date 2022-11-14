@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../model/course.dart';
 import '../cards/continue_watching_card.dart';
 class ContinueWatchingList extends StatefulWidget {
-  const ContinueWatchingList({Key? key}) : super(key: key);
+  const ContinueWatchingList({Key key}) : super(key: key);
 
   @override
   State<ContinueWatchingList> createState() => _ContinueWatchingListState();

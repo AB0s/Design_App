@@ -4,7 +4,7 @@ import '../../constants.dart';
 import '../../model/course.dart';
 
 class RecentCourseCard extends StatelessWidget {
-  RecentCourseCard({required this.course});
+  RecentCourseCard({@required this.course});
   Course course;
   @override
   Widget build(BuildContext context) {
