@@ -105,7 +105,7 @@ var continueWatchingCourses = [
         Color(0xFF202A78),
       ],
     ),
-    illustration: 'illustration-06.png', logo: '',
+      illustration: 'illustration-06.png', logo: '',
   ),
   Course(
     courseTitle: "Animating in Principle",
@@ -187,7 +187,7 @@ var courseSections = [
         Color(0xFFCB012B),
       ],
     ),
-    illustration: 'illustration-11.png', logo: '',
+      illustration: 'illustration-11.png', logo: '',
   ),
 ];
 

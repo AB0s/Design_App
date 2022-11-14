@@ -16,7 +16,7 @@ class CourseSectionsScreen extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.all(32),
+            padding: const EdgeInsets.all(32),
             decoration: const BoxDecoration(
                 color: kCardPopupBackgroundColor,
                 borderRadius: BorderRadius.only(

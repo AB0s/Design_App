@@ -1,15 +1,20 @@
 import 'package:codedesign/constants.dart';
 import 'package:codedesign/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key key}) : super(key: key);
+
   @override
+  // ignore: library_private_types_in_public_api
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-   String email;
-   String password;
+  String email;
+  String password;
+  final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         const SizedBox(
                           height: 15.0,
                         ),
-                        Container(
+                        SizedBox(
                           height: 130.0,
                           child: Column(
                             children: [
@@ -109,12 +114,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                       style: kLoginInputTextStyle.copyWith(
                                         color: Colors.black,
                                       ),
-                                      onChanged: (textEntered){
-                                        email=textEntered;
+                                      onChanged: (textEntered) {
+                                        email = textEntered;
                                       },
                                     ),
                                   ),
-                                  Divider(),
+                                  const Divider(),
                                   Padding(
                                     padding: const EdgeInsets.only(
                                       bottom: 5.0,
@@ -134,8 +139,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                         hintText: "Password",
                                         hintStyle: kLoginInputTextStyle,
                                       ),
-                                      onChanged: (textEntered){
-                                        password=textEntered;
+                                      onChanged: (textEntered) {
+                                        password = textEntered;
                                       },
                                     ),
                                   ),
@@ -150,11 +155,58 @@ class _LoginScreenState extends State<LoginScreen> {
                         Row(
                           children: [
                             GestureDetector(
-                              onTap: () {
-                                Navigator.push(
+                              onTap: () async {
+                                try {
+                                  await _auth.signInWithEmailAndPassword(
+                                      email: email, password: password);
+                                  // ignore: use_build_context_synchronously
+                                  Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => HomeScreen()));
+                                      builder: (context) => HomeScreen(),
+                                      fullscreenDialog: false,
+                                    ),
+                                  );
+                                } on FirebaseAuthException catch (err) {
+                                  if (err.code == "user-not-found") {
+                                    try {
+                                      await _auth
+                                          .createUserWithEmailAndPassword(
+                                              email: email, password: password)
+                                          .then(
+                                        (user) {
+                                          user.user.sendEmailVerification();
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  HomeScreen(),
+                                              fullscreenDialog: false,
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    } catch (err) {}
+                                  } else {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          title: const Text("Error"),
+                                          content: Text(err.message),
+                                          actions: [
+                                            FlatButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: const Text("Ok!"),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  }
+                                }
                               },
                               child: Container(
                                 alignment: Alignment.center,
@@ -181,13 +233,40 @@ class _LoginScreenState extends State<LoginScreen> {
                         const SizedBox(
                           height: 15,
                         ),
-                        Container(
-                          child: Text(
-                            "Forgot Passwprd?",
-                            style: kCalloutLabelStyle.copyWith(
-                                color: const Color(0x721B1E9C)),
+                    GestureDetector(
+                      onTap: () {
+                        _auth
+                            .sendPasswordResetEmail(email: email)
+                            .then((value) => {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text("Email Sent!"),
+                                content: Text(
+                                    "The password reset email has been sent!"),
+                                actions: [
+                                  FlatButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text("OK!"),
+                                  ),
+                                ],
+                              );
+                            },
                           ),
-                        )
+                        });
+                      },
+                      child: Container(
+                        child: Text(
+                          "Forgot Password?",
+                          style: kCalloutLabelStyle.copyWith(
+                            color: Color(0x721B1E9C),
+                          ),
+                        ),
+                      ),
+                    ),
                       ],
                     ),
                   ),
