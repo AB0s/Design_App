@@ -19,7 +19,7 @@ class ContinueWatchingScreen extends StatelessWidget {
       boxShadow: const [
         BoxShadow(color: kShadowColor, offset: Offset(0, -12), blurRadius: 32),
       ],
-      minHeight: 50,
+      minHeight: 25,
       maxHeight: MediaQuery.of(context).size.height * 0.85,
       panel: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
