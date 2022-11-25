@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -95,6 +97,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
+    _auth.currentUser.reload();
     loadUserData();
     loadBadges();
   }
@@ -102,7 +105,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
-      print("A file was selected");
+      File _image = File(pickedFile.path);
+      _storage
+          .ref("profile_pictures/${_auth.currentUser.uid}.jpg")
+          .putFile(_image)
+          .then((snapshot) {
+        snapshot.ref.getDownloadURL().then((url) {
+          _firestore
+              .collection("users")
+              .doc(_auth.currentUser.uid)
+              .update({'profilePic': url}).then((snapshot) {
+            _auth.currentUser.updateProfile(photoURL: url);
+          });
+        });
+      });
     } else {
       print("A file was not selected");
     }
@@ -260,7 +276,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         ? ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(30.0),
-                                            child: Image.network(photoURL),
+                                            child: Image.network(photoURL,
+                                            width: 60,fit: BoxFit.cover,),
                                           )
                                         : const Icon(Icons.person),
                                   ),
