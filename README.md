@@ -1,4 +1,4 @@
-# codedesign
+# DesignApp
 
 A new Flutter project.
 
